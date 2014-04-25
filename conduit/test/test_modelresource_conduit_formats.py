@@ -59,13 +59,31 @@ class ResourceFormatTestCase(ConduitTestCase):
         self.resource_as_context.Meta.api = Api(name="v1")
         self.resource_as_context.Meta.api.register(TestResourceAsContext())
 
+        #
+        #  create a recommended resource ( no super class )
+        #  where the Mixin methods we call will call into
+        #  private methods
+        #
+        class TestResourceAsPrivateer(ModelResource):
+            class Meta(ModelResource.Meta):
+                conduit=(
+                    'conduit.test.conduit_formats.ConduitMixinPrivateer.build_pub',
+                    'conduit.test.conduit_formats.ConduitMixinPrivateer.return_response',
+                )
+                model = Bar
+                pk_field = 'id'
+        self.resource_as_priv = TestResourceAsPrivateer()
+        self.resource_as_priv.Meta.api = Api(name="v1")
+        self.resource_as_priv.Meta.api.register(TestResourceAsPrivateer())
+
         # override urls
         self.original_urls = example.urls.urlpatterns
         example.urls.urlpatterns += patterns(
             '',
             url(r'^api_as_func/', include(self.resource_as_func.Meta.api.urls)),
             url(r'^api_as_mixin/', include(self.resource_as_mixin.Meta.api.urls)),
-            url(r'^api_as_context/', include(self.resource_as_context.Meta.api.urls))
+            url(r'^api_as_context/', include(self.resource_as_context.Meta.api.urls)),
+            url(r'^api_as_priv/', include(self.resource_as_priv.Meta.api.urls))
         )
 
     def tearDown(self):
@@ -92,3 +110,11 @@ class ResourceFormatTestCase(ConduitTestCase):
         get_detail = self.factory.get('/{0}/{0}/'.format(bar.__class__.__name__,bar.id))
         response = self.resource_as_context.view( get_detail, *[], **{} )
         self.assertEqual(response['success'], True)
+
+    def test_resource_as_priv(self):
+        bar = Bar( name=str( uuid.uuid4() )[:8] )  
+        bar.save()
+        get_detail = self.factory.get('/{0}/{0}/'.format(bar.__class__.__name__,bar.id))
+        response = self.resource_as_priv.view( get_detail, *[], **{} )
+        self.assertEqual(response['success'], True)
+

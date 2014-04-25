@@ -85,7 +85,7 @@ class ForeignKeyField(APIField):
         if self.embed:
             for methodname in self.dehydrate_conduit:
                 bound_method = resource._get_method(methodname)
-                (request, args, kwargs,) = bound_method(request, *args, **kwargs)
+                (request, args, kwargs,) = bound_method(resource, request, *args, **kwargs)
             # Grab the dehydrated data and place it on the parent's bundle
             related_bundle = kwargs['bundles'][0]
             bundle['response_data'][self.attribute] = related_bundle['response_data']
@@ -130,7 +130,7 @@ class ForeignKeyField(APIField):
         resource.Meta.api = parent_inst.Meta.api
         for methodname in self.save_conduit:
             bound_method = resource._get_method(methodname)
-            (request, args, kwargs,) = bound_method(request, *args, **kwargs)
+            (request, args, kwargs,) = bound_method(resource, request, *args, **kwargs)
 
         # Now we have to update the FK reference on the original object
         # before saving
@@ -210,7 +210,7 @@ class ManyToManyField(APIField):
         if self.embed:
             for methodname in self.dehydrate_conduit:
                 bound_method = resource._get_method(methodname)
-                (request, args, kwargs,) = bound_method(request, *args, **kwargs)
+                (request, args, kwargs,) = bound_method(resource, request, *args, **kwargs)
 
             dehydrated_data = []
             for related_bundle in kwargs['bundles']:
@@ -257,7 +257,7 @@ class ManyToManyField(APIField):
             resource.Meta.api = parent_inst.Meta.api
             for methodname in self.save_conduit:
                 bound_method = resource._get_method(methodname)
-                (request, args, kwargs) = bound_method(request, *args, **kwargs)
+                (request, args, kwargs) = bound_method(resource, request, *args, **kwargs)
             # Grab the dehydrated data and place it on the parent's bundle
             related_bundles.append(kwargs['bundles'][0])
 

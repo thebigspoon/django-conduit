@@ -1,6 +1,9 @@
 from importlib import import_module
+from inspect import isfunction
 from conduit.exceptions import HttpInterrupt
 from django.db import transaction
+
+import sys
 
 class Conduit(object):
     """
@@ -18,8 +21,16 @@ class Conduit(object):
             module = import_module(module)
             cls = getattr(module, cls)
             method = getattr(cls, method)
-        bound_method = method.__get__( self, cls )
-        return bound_method
+        #
+        #  make sure Conduit-resource subclasses
+        #  have the parent class of the method we want to call 
+        #  in their inheritence tree. 
+        #  if it does not already exist, add it to __bases__
+        #  for module-level functions, skip
+        #
+        if not isfunction( method ) and hasattr( self.__class__, '__bases__' ) and not isinstance( self, cls ):
+                self.__class__.__bases__ = self.__class__.__bases__ + ( cls, ) 
+        return method 
 
     def view(self, request, *args, **kwargs):
         """
@@ -33,9 +44,9 @@ class Conduit(object):
             with transaction.commit_on_success():
                 for method_string in self.Meta.conduit[:-1]:
                     bound_method = self._get_method(method_string)
-                    (request, args, kwargs,) = bound_method( request, *args, **kwargs)
+                    (request, args, kwargs,) = bound_method(self, request, *args, **kwargs)
         except HttpInterrupt as e:
             return e.response
 
         bound_response_method = self._get_method(self.Meta.conduit[-1])
-        return bound_response_method(request, *args, **kwargs)
+        return bound_response_method(self, request, *args, **kwargs)
