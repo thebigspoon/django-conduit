@@ -228,7 +228,7 @@ class ModelResource(Resource):
         fields = []
         field_meta = getattr(self, 'Fields', None)
         if field_meta:
-            for fieldname, field in field_meta.__dict__.items():
+            for fieldname, field in six.iteritems(field_meta.__dict__):
                 if not fieldname.startswith('_'):
                     fields.append(field)
         return fields
@@ -348,7 +348,7 @@ class ModelResource(Resource):
         filters.update(self.Meta.default_filters)
 
         # Update from request filters
-        for key, value in get_params.items():
+        for key, value in six.iteritems(get_params):
             if key not in self.Meta.allowed_filters:
                 message = {'__all__': '{0} is not an allowed filter'.format(key)}
                 response = self.create_json_response(py_obj=message, status=400)
@@ -392,7 +392,7 @@ class ModelResource(Resource):
     def json_to_python(self, request, *args, **kwargs):
         if request.body:
             data = request.body
-            kwargs['request_data'] = json.loads(data)
+            kwargs['request_data'] = json.loads(data.decode('UTF-8'))
         return (request, args, kwargs)
 
     def _from_basic_type(self, field, data):
@@ -554,7 +554,7 @@ class ModelResource(Resource):
 
                 # Remove extra fields before validating forms
                 # Such as resource_uri
-                for key, val in data_copy.items():
+                for key in list(data_copy.keys()):
                     if key not in fieldnames:
                         del data_copy[key]
 
