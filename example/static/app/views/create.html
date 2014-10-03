@@ -1,0 +1,56 @@
+<div class="ctrl-wrapper" ng-controller="CreateController as create">
+    <div class="1-column">
+        <div class="row">
+            <form name="form_ref" ng-submit="create.sync()" novalidate>
+                <div class="control-group" ng-class="{ error: form_ref.name.$invalid }" >
+                    <div class="controls">
+                        <input type="text" placeholder="name" name="name" ng-model="create.record.name"/>
+                    </div>
+                </div>
+                <div class="control-group" ng-class="{ error: form_ref.text.$invalid }" >
+                    <div class="controls">
+                        <input ype="text" placeholder="text" name="text" ng-model="create.record.text"/>
+                    </div>
+                </div>
+                <div class="control-group" ng-class="{ error: form_ref.float_field.$invalid }" >
+                    <div class="controls">
+                        <input type="number" step="0.01" placeholder="float field" name="float_field" ng-model="create.record.float_field"/>
+                    </div>
+                </div>
+                <div class="control-group" ng-class="{ error: form_ref.decimal.$invalid }" >
+                    <div class="controls">
+                        <input  type="number" step="0.01" placeholder="decimal field" name="decimal" ng-model="create.record.decimal"/>
+                    </div>
+                </div>
+                <div class="control-group" ng-class="{ error: form_ref.integer.$invalid }" >
+                    <div class="controls">
+                        <input  type="number" step="1" placeholder="integer" name="integer" ng-model="create.record.integer"/>
+                    </div>
+                </div>
+                <div class="control-group" ng-class="{ error: form_ref.birthday.$invalid }" >
+                    <div class="controls">
+                        <input  type="date" placeholder="birthday" name="birthday" ng-model="create.record.birthday"/>
+                    </div>
+                </div>
+                <div class="control-group" ng-class="{ error: form_ref.boolean.$invalid }" >
+                    <div class="controls">
+                        <label>
+                            True
+                            <input  type="radio" placeholder="boolean" name="boolean" ng-model="create.record.boolean" value="true"/>
+                        </label>
+                        <label>
+                            False
+                            <input  type="radio" placeholder="boolean" name="boolean" ng-model="create.record.boolean" value="false"/>
+                        </label>
+                    </div>
+                </div>
+                <div class="code-wrapper">
+                    <code>
+                        {{ create.record }}
+                    </code>
+                </div>
+                <button type="submit" class="button radius">Create</button>
+            </form>
+        </div>
+    </div>
+</div>

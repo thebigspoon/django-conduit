@@ -18,6 +18,9 @@ class BazResource(ModelResource):
 class FooResource(ModelResource):
     class Meta(ModelResource.Meta):
         model = Foo
+        default_limit = 500
+        max_limit = 1000
+        allowed_ordering = [ '-created' ]
     class Fields:
         bar = ForeignKeyField(attribute='bar', resource_cls=BarResource, embed=True)
         bazzes = ManyToManyField(attribute='bazzes', resource_cls=BazResource, embed=True)

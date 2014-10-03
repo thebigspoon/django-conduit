@@ -24,11 +24,10 @@
     <div class="container">
       <div class="header">
         <ul class="nav nav-pills pull-right">
-          <li class="active"><a ng-href="#">Home</a></li>
-          <li><a ng-href="#/about">About</a></li>
-          <li><a ng-href="#">Contact</a></li>
+          <li class="active"><a ng-href="#">ListView</a></li>
+          <li><a ng-href="#/create">CreateView</a></li>
         </ul>
-        <h3 class="text-muted">conduit</h3>
+        <h3 class="text-muted">Django-Conduit</h3>
       </div>
 
       <div ng-view=""></div>
@@ -62,6 +61,7 @@
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/list.js"></script>
+        <script src="scripts/controllers/create.js"></script>
         <!-- endbuild -->
 </body>
 </html>
