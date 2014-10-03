@@ -9,6 +9,8 @@ sys.path.insert(0, os.path.realpath(os.path.join(os.path.dirname(__file__), '../
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+ABSOLUTE_PATH = os.path.abspath( os.path.dirname( os.path.dirname( __file__ ) ) )
+
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
@@ -128,6 +130,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'conduit',
+    'django_extensions',
     # 'api',
     'example',
 )
