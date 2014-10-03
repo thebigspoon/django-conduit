@@ -2,3 +2,5 @@ dist/
 build/
 *.pyc
 venv/
+example/static/node_modules/
+
