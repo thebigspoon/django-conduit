@@ -4,6 +4,8 @@ import sys
 # Add conduit to PATH so we can import it
 sys.path.insert(0, os.path.realpath(os.path.join(os.path.dirname(__file__), '../../')))
 
+ABSOLUTE_PATH = os.path.dirname( __file__ )
+
 # Django settings for example project.
 
 DEBUG = True
@@ -117,6 +119,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    os.path.join( os.path.dirname(ABSOLUTE_PATH), 'templates' ),
 )
 
 INSTALLED_APPS = (
@@ -146,16 +149,25 @@ LOGGING = {
         }
     },
     'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+        },  
         'mail_admins': {
-            'level': 'ERROR',
+            'level': 'DEBUG',
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
         }
     },
     'loggers': {
+        '': {
+            'handlers': [ 'console' ],
+            'level': 'DEBUG',
+            'propogate': True,
+        },
         'django.request': {
             'handlers': ['mail_admins'],
-            'level': 'ERROR',
+            'level': 'DEBUG',
             'propagate': True,
         },
     }

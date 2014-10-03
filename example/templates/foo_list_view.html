@@ -1,0 +1,9 @@
+<ul>
+{% for foo in foo_list %}
+    {% if is_conduit_view %}
+        <li><a href={% url 'foo_conduit_detail_view' foo.pk %}>{{ foo.id }}, {{ foo.name }}, {{ foo.text }}</a>&nbsp;<button><a href={% url 'foo_conduit_model_form_update_view' foo.pk %}>Edit<a></button></li>
+    {% else %}
+            <li><a href={% url 'foo_detail_view' foo.pk %}>{{ foo.id }}, {{ foo.name }}, {{ foo.text }}</a></li>
+    {% endif %}
+{% endfor %}
+</ul>

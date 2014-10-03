@@ -1,0 +1,41 @@
+<!------FORM ERRORS ---------->
+{% if form.errors %}
+<div class="errors container">
+    <h4 class="msg">There are errors below</h4>
+    {%comment%}Uncomment the following to see what the errors are:{%endcomment%}
+    <ul>
+        {% for field in form%}
+            {% if field.errors %}
+                <li><b>{{ field.label_tag }}</b>{{ field.errors }}</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+{% if form.non_field_errors %}
+  <div class="errors container">
+    <h4 class="msg">{{ form.non_field_errors }}</h4>
+  </div>
+{% endif %}
+<!------ FORM ERRORS ---------->
+
+<div id="container" class="container">
+<form id="form_id" enctype="multipart/form-data" method="POST" action=".">{% csrf_token %}
+        <div id="{{ form.prefix }}-row">
+            {% comment %} write out form hidden fields {% endcomment %}
+            {% for fld in form.hidden_fields %}{{ fld }}{% endfor %}
+            {% for field in form%}
+                {% comment %} write out not hidden fields {% endcomment %}
+                {% if not field.is_hidden %}
+                    <div class="field">
+                        {% comment%}{{ field.errors }}{% endcomment %}
+                        <h4>{{ field.label_tag }}</h4>{{ field }}<span class="help_text">{{ field.help_text }}</span>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+       <input type="submit" value="Submit" />
+    </form>
+</div>
+
