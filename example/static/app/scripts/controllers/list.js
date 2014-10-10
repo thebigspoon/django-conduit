@@ -17,7 +17,7 @@ angular.module('conduitApp')
         $http({method: 'GET', url: '/api/v1/foo/?order_by=-created'}).
             success(function(data, status, headers, config) {
                 self.data = data;
-                $log.debug( "[ SUCCESS ]" );
+                $log.debug( "[ SUCCESS LIST ]" );
             }).
             error(function(data, status, headers, config) {
                 $log.debug( "[ ERROR ]: ", status );

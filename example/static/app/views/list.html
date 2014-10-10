@@ -4,7 +4,8 @@
             <span>
             <h2 ng-if="foo.name !== ''">{{ foo.name }}</h2> 
             <h2 ng-if="foo.name === ''"><i>No Name</i></h2> 
-            <a class="btn btn-small btn-success" ng-href="#">Edit<span class="glyphicon glyphicon-ok"></span></a>
+            <a class="btn btn-small btn-info" ng-href="#/delete/{{ foo.id }}">Delete<span class="glyphicon glyphicon-ok"></span></a>
+            <a class="btn btn-small btn-success" ng-href="#/edit/{{ foo.id }}">Edit<span class="glyphicon glyphicon-ok"></span></a>
             </span>
         </div>
     </div>

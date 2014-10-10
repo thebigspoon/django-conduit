@@ -1,0 +1,12 @@
+- create services at the level of each resource that share attributeds and logic for create/read/update/delete
+
+- watch or callback when a data object changes or is set so we can coerice/cast into types the UI expects and the reciprocal for RESt service
+
+- change class selector based on routing information
+
+- make a route for edit that passes in the number and retrives the javascript foo object based on id
+
+- make the create and edit forms deal with child forms for bazzes and bars
+
+- think about writing tests
+

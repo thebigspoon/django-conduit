@@ -1,31 +1,49 @@
 'use strict';
 
 /**
- * @ngdoc function
- * @name conduitApp.controller:MainCtrl
+ * @ngdoc controller 
+ * @name conduitApp.controller:CreateController
  * @description
  * # CreateController
- * Controller of the conduitApp
+ * Controller of the conduitApp that handles create UI
  */
-angular.module('conduitApp')
-    .controller( 'CreateController', [ '$scope', '$http', '$log', function ( $scope, $http, $log ) {
 
-        this.record = {
-            bar : {} ,
-            bazzes : [] ,
-        };
-        var self = this;
+var CreateController = function ( $scope, $log, CreateFooService ) {
+    
+    this.record = {
+        bar : {} ,
+        bazzes : [] ,
+    };
+    this.$scope = $scope;
+    this.$log = $log;
+    this.$CreateFooService = CreateFooService;
 
-        this.sync = function() {
-            $log.debug( "[ SYNCING... ]" );
-            $http({method: 'POST', data: self.record, url: '/api/v1/foo/', })
-                .success(function(data, status, headers, config) {
-                    self.record = data;
-                    $log.debug( "[ SUCCESS CREATE ]" );
-                })
-                .error(function(data, status, headers, config) {
-                    $log.debug( "[ ERROR CREATE ]: ", status );
-                });
-        }
+};
 
-    }] );
+
+//  DI
+CreateController.$inject = [ '$scope', '$log', 'CreateFooService' ];
+
+
+//  METHODS
+CreateController.prototype.create_sync = function () {
+
+        this.$log.debug( "[ CREATE SYNCING ]" );
+        this.$CreateFooService.sync( this.record )
+            .success(function(data, status, headers, config) {
+
+                this.record = data;
+                this.$log.debug( "[ SUCCESS CREATE ]", this.data );
+
+            }.bind(this))
+            .error(function(data, status, headers, config) {
+
+                this.$log.debug( "[ ERROR CREATE ]: ", status );
+
+            }.bind(this));
+
+};
+
+
+//  REGISTER
+angular.module('conduitApp').controller( 'CreateController', CreateController );

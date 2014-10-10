@@ -27,6 +27,10 @@ angular
         templateUrl: 'views/create.html',
         controller: 'CreateController'
       })
+      .when('/edit/:resource_id/', {
+        templateUrl: 'views/edit.html',
+        controller: 'EditController'
+      })
       .otherwise({
         redirectTo: '/'
       });
