@@ -1,3 +1,7 @@
+- how will directive validation be handled at the field level and form level -- do some examples
+
+- why are the parent scopes not changing immediately but only after submit ( jsfiddle? )
+
 - create services at the level of each resource that share attributeds and logic for create/read/update/delete
 
 - watch or callback when a data object changes or is set so we can coerice/cast into types the UI expects and the reciprocal for RESt service

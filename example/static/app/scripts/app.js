@@ -23,6 +23,10 @@ angular
         templateUrl: 'views/list.html',
         controller: 'ListController'
       })
+      .when('/fakecreate', {
+        templateUrl: 'views/fake_form.html',
+        controller: 'FakeController'
+      })
       .when('/create', {
         templateUrl: 'views/create.html',
         controller: 'CreateController'

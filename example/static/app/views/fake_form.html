@@ -1,0 +1,36 @@
+<div class="ctrl-wrapper" ng-controller="FakeController as faker">
+    <div class="1-column">
+        <div class="row">
+            <form name="form_ref" ng-submit="faker.create_sync()" novalidate>
+
+                <div class="controls">
+                    <z-textinput 
+                        z-data-name="servee_name" 
+                        z-data-placeholder="Servee name here" 
+                        z-data-label="Servee"
+                        z-data-required="true" 
+                        ng-model="faker.record.servee"
+                    ></z-textinput>
+                </div>
+                <div class="controls">
+                    <z-textinput
+                        z-data-name="defendant_name"
+                        z-data-placeholder="Defendant name here" 
+                        z-data-label="Defendant" 
+                        z-data-required="true" 
+                        ng-model="faker.record.defendant"
+                    ></z-textinput>
+                </div>
+
+                <div class="code-wrapper">
+                    <code>
+                        {{ faker.record }}
+                    </code>
+                </div>
+
+                <button type="submit" class="button radius">Create</button>
+
+            </form>
+        </div>
+    </div>
+</div>
