@@ -12,6 +12,8 @@ var zTextinput = function ( $document, $log ) {
 
     var linker_def = function( scope, element, attr, controllers ) { 
 
+        var typedef =  'TEXTINPUT';
+
         $log.info( "[ INSTANTIATE ]: ", attr.zDataName );
         $log.debug( "[ SCOPE ]: ", scope );
         $log.debug( "[ CONTROLLERS ]: ", controllers );
@@ -22,30 +24,20 @@ var zTextinput = function ( $document, $log ) {
         var form_controller = controllers[1];
 
 
-        // labeling
-        if ( attr.zDataLabel ) {
-            scope.ztext_label = attr.zDataLabel;
-        }
+        /*
+        **
+        **  REQUIRED
+        **
+        */
+        form_controller.HtmlService.add_required_attributes( scope, element, attr );
 
-        //  arg(s) added to inputs
-        if ( attr.zDataName ) {
-            element.find( 'input' ).attr( 'name',  attr.zDataName );
-        }
-        if ( attr.zDataPlaceholder ) {
-            element.find( 'input' ).attr( 'placeholder',  attr.zDataPlaceholder );
-        }
 
-        if ( attr.zDataRequired ) {
-            element.find( 'input' ).attr( 'required', 'required' );
-        }
-
-        if ( attr.zDataDisabled ) {
-            element.find( 'input' ).attr( 'disabled', 'disabled' );
-        }
-
-        if ( attr.zDataReadonly ) {
-            element.find( 'input' ).attr( 'readonly', 'readonly' );
-        }
+        /*
+        **
+        **  OPTIONAL
+        **
+        */
+        form_controller.HtmlService.add_optional_attributes( scope, element, attr );
 
 
         // update the view with the model_controller's model value

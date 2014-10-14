@@ -8,7 +8,7 @@
  * Controller of the conduitApp that handles create UI
  */
 
-var FakeController = function ( $scope, $log, CreateFooService ) {
+var FakeController = function ( $scope, $log, CreateFooService, HtmlService ) {
     
     this.record = {
         defendant : "" ,
@@ -19,12 +19,13 @@ var FakeController = function ( $scope, $log, CreateFooService ) {
     this.$scope = $scope;
     this.$log = $log;
     this.$CreateFooService = CreateFooService;
+    this.HtmlService = HtmlService;
 
 };
 
 
 //  DI
-FakeController.$inject = [ '$scope', '$log', 'CreateFooService' ];
+FakeController.$inject = [ '$scope', '$log', 'CreateFooService', 'HtmlService' ];
 
 
 //  METHODS
