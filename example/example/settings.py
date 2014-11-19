@@ -179,8 +179,8 @@ LOGGING = {
         }
     },
     'formatters': {
-	'minimal': {
-            'format': '%(message)s'
+        'minimal': {
+                'format': '%(message)s'
         },
     },
     'handlers': {
@@ -201,7 +201,7 @@ LOGGING = {
     },
     'loggers': {
         '': {
-            'handlers': [ 'console'],
+            'handlers': ['console'],
             'level': 'DEBUG',
             'propogate': True,
         },
