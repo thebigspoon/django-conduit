@@ -7,7 +7,8 @@ from django.utils.unittest import TestSuite
  
 class GeoTestRunner( BaseRunner ):
     """
-    only run geo related tests
+    only run geo related tests. To run then use the --settings flags:
+    `python example/manage.py test --settings='geoexample.settings'`
     """
 
     def build_suite(self, *args, **kwargs):
@@ -21,7 +22,7 @@ class StandardTestRunner( BaseRunner ):
     """
     for local development and quick "spot-checks" with the unit tests
     the installation, dependencies, permissions, and time required to set up Postgresql/PostGIS might be annoying.
-    this test runner excludes geo related tests.
+    this test runner excludes geo related tests. it is the default TestRunner.
     """
 
     def build_suite(self, *args, **kwargs):
