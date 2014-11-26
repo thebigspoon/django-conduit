@@ -20,7 +20,9 @@ install:
 before_script:
     - bash ./travis_postgis_setup.sh
 
-script: python example/manage.py test conduit
+script: 
+    - python example/manage.py test conduit
+    - python example.manage.py test --settings='geoexample.settings'
 
 matrix:
   exclude:
