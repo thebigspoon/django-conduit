@@ -4,3 +4,4 @@
 from conduit.test.test_modelresource_methods import *
 from conduit.test.test_custom_pkfield_overrides import *
 from conduit.test.test_modelresource_conduit_formats import *
+from conduit.test.test_geo_modelresource_methods_and_filters import *
