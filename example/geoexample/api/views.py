@@ -1,14 +1,7 @@
-## api/views.py
 from conduit.api import ModelResource
 from conduit.api.fields import ForeignKeyField, ManyToManyField
 from geoexample.models import GeoBar, GeoBaz, GeoFoo
 
-
-#
-#
-#  resources based on GeoManager(s)
-#
-#
 class GeoBarResource(ModelResource):
     class Meta(ModelResource.Meta):
         model = GeoBar
