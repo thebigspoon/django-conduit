@@ -22,7 +22,7 @@ before_script:
 
 script: 
     - python example/manage.py test conduit
-    - python example.manage.py test --settings='geoexample.settings'
+    - python example/manage.py test --settings='geoexample.settings'
 
 matrix:
   exclude:
